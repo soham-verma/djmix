@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: djmix
+      POSTGRES_USER: djmix
+      POSTGRES_PASSWORD: changeme
+  redis:
+    image: redis:7
+  web:
+    build: .
+    command: celery -A djmix worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on: [db, redis]
+  api:
+    build: .
+    command: gunicorn djmix.wsgi:application --bind 0.0.0.0:8000
+    volumes: [.:/code]
+    ports: ['8000:8000']
+    depends_on: [db, redis]
