@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
+import styles from './Deck.module.css';
 
 interface DeckProps {
   url: string;
@@ -36,8 +37,8 @@ export function Deck({ url }: DeckProps) {
   };
 
   return (
-    <div className="deck">
-      <div ref={waveformRef} className="waveform" />
+    <div className={styles.deck}>
+      <div ref={waveformRef} className={styles.waveform} />
       <button onClick={togglePlay}>{playing ? 'Pause' : 'Play'}</button>
       <label>
         Tempo: 
