@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 export function useMIDI(onMessage: (msg: WebMidi.MIDIMessageEvent) => void) {
   useEffect(() => {
     navigator.requestMIDIAccess().then(midi => {

@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from tracks.models import Track
+
+User = get_user_model()
 
 class Playlist(models.Model):
     owner     = models.ForeignKey(User, on_delete=models.CASCADE)
