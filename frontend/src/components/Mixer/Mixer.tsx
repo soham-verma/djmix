@@ -1,13 +1,22 @@
-import Deck from '../Deck/Deck'
-import MixerControls from './MixerControls'
+import { useState } from 'react';
+import MixerControls from './MixerControls';
+import styles from './Mixer.module.css';
 
-export default function Mixer() {
-  // Demo URLs would be replaced with real tracks
+type MixerProps = {
+  onCrossfadeChange?: (value: number) => void;
+};
+
+export default function Mixer({ onCrossfadeChange }: MixerProps) {
+  const [crossfade, setCrossfade] = useState(0.5);
+
+  const handleChange = (v: number) => {
+    setCrossfade(v);
+    onCrossfadeChange?.(v);
+  };
+
   return (
-    <div className="mixer">
-      <Deck id="A" url="/trackA.mp3" />
-      <Deck id="B" url="/trackB.mp3" />
-      <MixerControls />
+    <div className={styles.mixer}>
+      <MixerControls value={crossfade} onChange={handleChange} />
     </div>
-  )
+  );
 }

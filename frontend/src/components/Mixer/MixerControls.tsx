@@ -1,27 +1,22 @@
-import { ChangeEvent } from 'react'
-import { useStore } from '../../context/store'
+interface Props {
+  value: number;
+  onChange: (value: number) => void;
+}
 
-export default function MixerControls() {
-  const crossfader = useStore(s => s.crossfader)
-  const setCrossfader = useStore(s => s.setCrossfader)
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCrossfader(parseFloat(e.target.value))
-  }
-
+export default function MixerControls({ value, onChange }: Props) {
   return (
-    <div className="mixer-controls">
+    <div>
       <label>
         Crossfader
         <input
           type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={crossfader}
-          onChange={onChange}
+          min="0"
+          max="1"
+          step="0.01"
+          value={value}
+          onChange={e => onChange(parseFloat(e.target.value))}
         />
       </label>
     </div>
-  )
+  );
 }

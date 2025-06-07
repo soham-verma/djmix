@@ -1,5 +1,8 @@
-from celery import shared_task
 import subprocess
+from celery import shared_task
+from .models import Track
+
+
 
 @shared_task
 def transcode_track(track_id):
